@@ -30,9 +30,12 @@ class TreeNode(object):
 
 class Solution:
     def inorderSuccessor(self, root, p):
+        if not root or not p:
+            return None
+
         # Find target node
         parent = None
-        while root:
+        while root and p:
             if root.val > p.val:
                 parent = root
                 root = root.left
@@ -42,16 +45,11 @@ class Solution:
                 break
 
         # root is target node or null
-        if not root or not (root.right or parent):
+        if not root:
             return None
 
         if not root.right:
-            if not parent:
-                return None
-            # elif parent.val < p.val:
-            #     return None
-            else:
-                return parent
+            return parent
 
         root = root.right
         while root.left:
@@ -79,6 +77,13 @@ def test():
     root.left = TreeNode(3)
     root.right = TreeNode(6)
     target = root.left
+    result = sol.inorderSuccessor(root, target)
+    printRes(result)
+
+    root.left.left = TreeNode(2)
+    root.left.right = TreeNode(4)
+    root.left.left.left = TreeNode(1)
+    target = root.left.right
     result = sol.inorderSuccessor(root, target)
     printRes(result)
 
