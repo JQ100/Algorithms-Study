@@ -21,6 +21,8 @@
     #     - No root -> None
     #     - No root.right -> parent
     #     - root.right, root.left
+
+
 class TreeNode(object):
     def __init__(self, x):
         self.val = x
